@@ -20,7 +20,7 @@ public class Chatbotrunner
 		String statement = in.nextLine();
 		
 
-313215313235;
+313215313235;asd
 		while (!statement.equals("Bye"))
 		{
 			System.out.println (chatbot1.getResponse(statement));
