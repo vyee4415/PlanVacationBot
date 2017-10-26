@@ -5,7 +5,7 @@ import java.util.Scanner;
  * @author Mr. Levin
  * @version September 2017
  */
-public class Chatbotrunner
+public class ChatBotRunner
 {
 
 	/**
@@ -13,14 +13,14 @@ public class Chatbotrunner
 	 */
 	public static void main(String[] args)
 	{
-		ChatBotLevin chatbot1 = new ChatBotLevin();
+		ChatBotQiu chatbot1 = new ChatBotQiu();
 		
 		System.out.println (chatbot1.getGreeting());
 		Scanner in = new Scanner (System.in);
 		String statement = in.nextLine();
 		
 
-313215313235;asd
+
 		while (!statement.equals("Bye"))
 		{
 			System.out.println (chatbot1.getResponse(statement));
