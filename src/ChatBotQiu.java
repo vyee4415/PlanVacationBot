@@ -16,7 +16,7 @@ public class ChatBotQiu
 	 */	
 	public String getGreeting()
 	{
-		return "Hi, what is up?";
+		return "Hello, PackBot at your service. How long is your vacation?";
 	}
 	
 	/**
@@ -29,22 +29,28 @@ public class ChatBotQiu
 	public String getResponse(String statement)
 	{
 		String response = "";
+		int vday;
 		
 		if (statement.length() == 0)
 		{
-			response = "Say something, please.";
+			response = "How long is your vacation?";
 		}
 
-		else if (findKeyword(statement, "no") >= 0)
+		else if (findKeyword(statement, vday <= 10) >= 0)
 		{
-			response = "Why so negative?";
-                	emotion--;
+			response = "Okay, we need to get you packing light.";
+                	
 		}
 		
-		else if (findKeyword(statement, "levin") >= 0)
+		else if (findKeyword(statement, vday > 10 && vday <= 30) >= 0)
 		{
-			response = "More like LevinTheDream amiright?";
-			emotion++;
+			response = "Okay, we need to get you packing moderately heavy.";
+			
+		}
+		else if (findKeyword(statement, vday > 30) >= 0)
+		{
+			response = "Okay, we need to get you packing heavy.";
+			
 		}
 
 		// Response transforming I want to statement
