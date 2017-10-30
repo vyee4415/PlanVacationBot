@@ -9,14 +9,14 @@ import java.util.Random;
 public class ChatBotYee
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
-	int emotion = 0;
+	int frustration = 0;
 	/**
 	 * Get a default greeting 	
 	 * @return a greeting
 	 */	
 	public String getGreeting()
 	{
-		return "Hi, what is up?";
+		return "Hi, what's good dood?";
 	}
 	
 	/**
@@ -29,26 +29,54 @@ public class ChatBotYee
 	public String getResponse(String statement)
 	{
 		String response = "";
-		
+		Random r = new Random ();
 		if (statement.length() == 0)
 		{
 			response = "Say something, please.";
+			frustration++;
 		}
 
-		else if (findKeyword(statement, "no") >= 0)
+// bad places that chatbot does not agree with
+		else if (findKeyword(statement, "China") >= 0)
 		{
-			response = "Why so negative?";
-                	emotion--;
+			frustration++;
+			return randomChinaResponses [r.nextInt(randomChinaResponses.length)];
+		}
+		else if (findKeyword(statement, "China") >= 0)
+		{
+			frustration++;
+			return randomChinaResponses [r.nextInt(randomChinaResponses.length)];
+		}
+		else if (findKeyword(statement, "China") >= 0)
+		{
+			frustration++;
+			return randomChinaResponses [r.nextInt(randomChinaResponses.length)];
 		}
 		
-		else if (findKeyword(statement, "levin") >= 0)
+// good places that chatbot agrees with
+		else if (findKeyword(statement, "Russia") >=0)
 		{
-			response = "More like LevinTheDream amiright?";
-			emotion++;
+			frustration--;
+			return randomRussiaResponses [r.nextInt(randomRussiaResponses.length)];
+		}
+		else if (findKeyword(statement, "Russia") >=0)
+		{
+			frustration--;
+			return randomRussiaResponses [r.nextInt(randomRussiaResponses.length)];
+		}
+		else if (findKeyword(statement, "Russia") >=0)
+		{
+			frustration--;
+			return randomRussiaResponses [r.nextInt(randomRussiaResponses.length)];
+		}
+		
+		else if(findKeyword(statement, "hello") >=0)
+		{
+			response = "Hello! Do you want to tell me what places you want to visit?";
 		}
 
 		// Response transforming I want to statement
-		else if (findKeyword(statement, "I want to", 0) >= 0)
+		else if (findKeyword(statement, "I want to visit", 0) >= 0)
 		{
 			response = transformIWantToStatement(statement);
 		}
@@ -81,7 +109,7 @@ public class ChatBotYee
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		int psn = findKeyword (statement, "I want to", 0);
+		int psn = findKeyword (statement, "I want to visit", 0);
 		String restOfStatement = statement.substring(psn + 9).trim();
 		return "Why do you want to " + restOfStatement + "?";
 	}
@@ -106,37 +134,8 @@ public class ChatBotYee
 		}
 		int psn = findKeyword (statement, "I want", 0);
 		String restOfStatement = statement.substring(psn + 6).trim();
-		return "Would you really be happy if you had " + restOfStatement + "?";
-	}
-	
-	
-	/**
-	 * Take a statement with "I <something> you" and transform it into 
-	 * "Why do you <something> me?"
-	 * @param statement the user statement, assumed to contain "I" followed by "you"
-	 * @return the transformed statement
-	 */
-	private String transformIYouStatement(String statement)
-	{
-		//  Remove the final period, if there is one
-		statement = statement.trim();
-		String lastChar = statement.substring(statement
-				.length() - 1);
-		if (lastChar.equals("."))
-		{
-			statement = statement.substring(0, statement
-					.length() - 1);
-		}
-		
-		int psnOfI = findKeyword (statement, "I", 0);
-		int psnOfYou = findKeyword (statement, "you", psnOfI);
-		
-		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
-		return "Why do you " + restOfStatement + " me?";
-	}
-	
-
-	
+		return "Would you really be happy if you " + restOfStatement + "?";
+	}	
 	
 	/**
 	 * Search for one word in phrase. The search is not case
@@ -154,8 +153,7 @@ public class ChatBotYee
 	 * @return the index of the first occurrence of goal in
 	 *         statement or -1 if it's not found
 	 */
-	private int findKeyword(String statement, String goal,
-			int startPos)
+	private int findKeyword(String statement, String goal, int startPos)
 	{
 		String phrase = statement.trim().toLowerCase();
 		goal = goal.toLowerCase();
@@ -224,26 +222,35 @@ public class ChatBotYee
 	private String getRandomResponse ()
 	{
 		Random r = new Random ();
-		if (emotion == 0)
+		if (frustration == 0)
 		{	
 			return randomNeutralResponses [r.nextInt(randomNeutralResponses.length)];
 		}
-		if (emotion < 0)
+		if (frustration > 0)
 		{	
 			return randomAngryResponses [r.nextInt(randomAngryResponses.length)];
 		}	
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
 	
-	private String [] randomNeutralResponses = {"Interesting, tell me more",
-			"Hmmm.",
+	private String [] randomNeutralResponses = {"Tell me the places you want to visit",
+			"Hmmm...?",
 			"Do you really think so?",
 			"You don't say.",
-			"It's all boolean to me.",
-			"So, would you like to go for a walk?",
-			"Could you say that again?"
+			"Could you say that again?",
+			"Really?"
 	};
-	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
-	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
+	private String [] randomAngryResponses = {"I don't reccomend your places to visit.", "Hmph, I like my cold countries like Antartica..", "Eww."};
+	private String [] randomHappyResponses = {"We have a lot in common!", "Ooo I really want to visit there too..", "Oh I've been there before, totally reccomend."};
 	
+	private String [] randomChinaResponses = {"I personally don't like China...","Great wall, more like lame wall. hehe","What's so good about China, there's so much pollution!!"};
+	private String [] random Responses = {""}
+	private String [] random Responses = {""}
+	
+	private String [] randomRussiaResponses = {"OHH RUSSIA I LOVE RUSSIA!","ALTHOUGH I'VE NEVER BEEN TO RUSSIA I DREAM IT EVERY NIGHT!","RUSSIA!! <33"};
+	private String [] random Responses = {""}
+	private String [] random Responses = {""}
 }
+
+
+
