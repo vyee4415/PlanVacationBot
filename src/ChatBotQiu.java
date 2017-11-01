@@ -37,9 +37,9 @@ public class ChatBotQiu
 			response = "How long is your vacation?";
 		}
 
-		else if (findKeyword(statement, "much") >= 0)
+		else if (findKeyword(statement, "many") >= 0)
 		{
-			response = "Well, how much do you need?";
+			response = "Well, how many do you need?";
                 	
 		}
 		
