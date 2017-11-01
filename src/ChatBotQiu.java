@@ -3,8 +3,9 @@
 /**
  * A program to carry on conversations with a human user.
  * This version:
- * @author Mr. Levin
- * @version September 2017
+ * @author Sophia Qiu 
+ * @version Oct - Nov 2017 
+ * @class period 2 Mr. Levin
  */
 public class ChatBotQiu
 {
@@ -16,7 +17,7 @@ public class ChatBotQiu
 	 */	
 	public String getGreeting()
 	{
-		return "Hello, PackBot at your service. How long is your vacation?";
+		return "Hello, PackBot at your service. What do you need help with?";
 	}
 	
 	/**
@@ -29,27 +30,27 @@ public class ChatBotQiu
 	public String getResponse(String statement)
 	{
 		String response = "";
-		int vday;
+		
 		
 		if (statement.length() == 0)
 		{
 			response = "How long is your vacation?";
 		}
 
-		else if (findKeyword(statement, vday <= 10) >= 0)
+		else if (findKeyword(statement, "much") >= 0)
 		{
-			response = "Okay, we need to get you packing light.";
+			response = "Well, how much do you need?";
                 	
 		}
 		
-		else if (findKeyword(statement, vday > 10 && vday <= 30) >= 0)
+		else if (findKeyword(statement, "can") >= 0)
 		{
 			response = "Okay, we need to get you packing moderately heavy.";
 			
 		}
-		else if (findKeyword(statement, vday > 30) >= 0)
+		else if (findKeyword(statement,"tired") >= 0)
 		{
-			response = "Okay, we need to get you packing heavy.";
+			response = "Cheer up!";
 			
 		}
 
