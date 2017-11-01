@@ -234,28 +234,22 @@ public class ChatBotYee
 	}
 	
 	private String [] randomNeutralResponses = {"Tell me the places you want to visit",
-												"Hmmm...?",
-												"Do you really think so?",
-												"You don't say.",
-												"Could you say that again?",
-												"Really?"
+			"Hmmm...?",
+			"Do you really think so?",
+			"You don't say.",
+			"Could you say that again?",
+			"Really?"
 	};
-	private String [] randomAngryResponses = {"I don't reccomend your places to visit.", 
-											"Hmph, I like my cold countries like Antartica..", 
-											"Eww."};
-	private String [] randomHappyResponses = {"We have a lot in common!", 
-											"Ooo I really want to visit there too..", 
-											"Oh I've been there before, totally reccomend."};
+	private String [] randomAngryResponses = {"I don't reccomend your places to visit.", "Hmph, I like my cold countries like Antartica..", "Eww."};
+	private String [] randomHappyResponses = {"We have a lot in common!", "Ooo I really want to visit there too..", "Oh I've been there before, totally reccomend."};
 	
-	private String [] randomChinaResponses = {"I personally don't like China...",
-											"Great wall, more like lame wall. hehe",
-											"What's so good about China, there's so much pollution!!"};
-
+	private String [] randomChinaResponses = {"I personally don't like China...","Great wall, more like lame wall. hehe","What's so good about China, there's so much pollution!!"};
+	private String [] random Responses = {""}
+	private String [] random Responses = {""}
 	
-	private String [] randomRussiaResponses = {"OHH RUSSIA I LOVE RUSSIA!",
-												"ALTHOUGH I'VE NEVER BEEN TO RUSSIA I DREAM IT EVERY NIGHT!",
-												"RUSSIA!! <33"};
-	
+	private String [] randomRussiaResponses = {"OHH RUSSIA I LOVE RUSSIA!","ALTHOUGH I'VE NEVER BEEN TO RUSSIA I DREAM IT EVERY NIGHT!","RUSSIA!! <33"};
+	private String [] random Responses = {""}
+	private String [] random Responses = {""}
 }
 
 
