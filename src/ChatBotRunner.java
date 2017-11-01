@@ -21,13 +21,14 @@ public class ChatBotRunner
 		ChatBotDiallo chatbot3 = new ChatBotDiallo();
 		ChatBotChen chatbot4 = new ChatBotChen();
 		
-		System.out.println("Hello!! Welcome to VacaBot, where we will help you get ready for that vacation you have ahead of you! What would you like help with?\n" + "\t Type 1 to get help with packing!\n" 
-				+ "\t Type 2 to get help planning what places to visit!\n" 
-				+ "\t Type 3 to get help with the financial aspects of the trip!\n" 
-				+ "\t Type 4 to get help with !\n" 
-				+ "Type " 
+		System.out.println("Hello!! Welcome to VacayBot, where we will help you get ready for that vacation you have ahead of you! What would you like help with?\n" 
+				+ "--> Type 1 to get help with packing! <--\n" 
+				+ "--> Type 2 to get help planning what places to visit! <--\n" 
+				+ "--> Type 3 to get help with the financial aspects of the trip! <--\n" 
+				+ "--> Type 4 to get help with ! <--\n" 
+				+ "--> Type " 
 				+ "\"bye\" " 
-				+ "to if you don't need any more help!\n"
+				+ "if you don't need any more help! <--"
 				);
 		
 		
@@ -86,7 +87,6 @@ public class ChatBotRunner
 		
 		if (user.toLowerCase().equals("bye")) {
 			System.out.println ("Enjoy the rest of your day!");
-			String statement = topic.nextLine();
 
 			}
 	

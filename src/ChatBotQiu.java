@@ -17,7 +17,7 @@ public class ChatBotQiu
 	 */	
 	public String getGreeting()
 	{
-		return "Hello, PackBot at your service. What do you need help with?";
+		return "Heyo, PackBot at your service. What do you need help with?";
 	}
 	
 	/**
@@ -30,29 +30,120 @@ public class ChatBotQiu
 	public String getResponse(String statement)
 	{
 		String response = "";
+		Random r = new Random ();
 		
 		
 		if (statement.length() == 0)
 		{
-			response = "How long is your vacation?";
+			response = "speak up please";
 		}
+		
+		//how to make bot annoyed
+		
+		else if (findKeyword(statement, "quit") >= 0)
+		{
+			
+			emotion--;
+			return randomQuitResponses [r.nextInt(randomQuitResponses.length)];
+			
+		}
+		
+		
+		else if (findKeyword(statement,"ugh") >= 0)
+		{
+			emotion--;
+			response = "you're breaking the mood";
+		
+		}
+		
+		
+		
+		//how to make bot happy
+		
+		else if (findKeyword(statement, "done") >= 0)
+		{
+			emotion++;
+			response = "!!! That's good";
+			
+		}
+		
+		
+		else if (findKeyword(statement,"progress") >= 0)
+		{
+			response = "I knew you were capable";
+			emotion++;
+		}
+		
+		//how much to bring
 
 		else if (findKeyword(statement, "many") >= 0)
 		{
 			response = "Well, how many do you need?";
+			
+			if (findKeyword(statement, "a lot") >= 0) {
+				response = "Oh boy..";
+			}
+			else if (findKeyword(statement, "not") >= 0) {
+				response = "that'll saves more room for other things!";
+			}
+				
                 	
 		}
 		
 		else if (findKeyword(statement, "can") >= 0)
 		{
-			response = "Okay, we need to get you packing moderately heavy.";
+			response = "Of course.";
 			
 		}
+		
+		
 		else if (findKeyword(statement,"tired") >= 0)
 		{
 			response = "Cheer up!";
 			
 		}
+		
+		
+		//basic items
+		
+		else if (findKeyword(statement, "forget") >= 0)
+		{
+			return randomForgetResponses [r.nextInt(randomForgetResponses.length)];
+			
+		}
+		
+		
+		else if (findKeyword(statement,"money") >= 0)
+		{
+			response = "Check out options at your bank to see if it's available internationally so you can just transfer money over! Also beware of fees.";
+			
+		}
+		
+		
+		else if (findKeyword(statement, "ok") >= 0)
+		{
+			response = "Glad we're agreeing on something!";
+			
+		}
+		
+		
+		else if (findKeyword(statement,"yes") >= 0)
+		{
+			response = "I knew you would say that.";
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
@@ -237,20 +328,53 @@ public class ChatBotQiu
 		}
 		if (emotion < 0)
 		{	
-			return randomAngryResponses [r.nextInt(randomAngryResponses.length)];
+			return randomAnnoyedResponses [r.nextInt(randomAnnoyedResponses.length)];
 		}	
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
 	
-	private String [] randomNeutralResponses = {"Interesting, tell me more",
-			"Hmmm.",
-			"Do you really think so?",
-			"You don't say.",
-			"It's all boolean to me.",
-			"So, would you like to go for a walk?",
-			"Could you say that again?"
-	};
-	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
-	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
+	private String [] randomNeutralResponses = {"Do you think a packing song exist? We should make one!",
+												"I didn't understand that bud. Try again!",
+												"You're doing great!",
+												"Pardon?",
+												"How many socks are too many?",
+												"It would be great if we could shrink and unshrink suitcases with superpowers so we can bring everything.",
+												"Don't forget that you can't bring things like scissors in a carry on so put those in the suitcase to check in!!"
+												};
+	private String [] randomAnnoyedResponses = {"Don't be a procrastinator.", 
+											"Your suitcase is crying",
+											"Did you know that the negatively emotional I get, the faster my battery drains?", 
+											"Yes and ...",
+											"Kaboom. I am not amused.",
+											"I'm not so sure about your life choices, kid...",
+											"You make me stressed. My battery's going to explode.",
+											">:(( blah",
+											};
 	
+	private String [] randomHappyResponses = {"You're on the right track, fellow!", 
+											"I'm proud of u bb.", 
+											"I gotchuu!! You can trust me.",
+											"Laa Dee Daa DUUUM,,, I'm just humming a tune to make you feel better.",
+											"Oo, that's a nice top. You should definitely bring it!",
+											"I'm so jealous that you're going on vacation!",
+											":D hehehehehhe",
+											"",
+											};
+private String [] randomForgetResponses =	{
+											"I can't read your mind unfortunately.",
+											"Weak memory is a sign of lack of sleep",
+											"Eat spaghetti to forgetti your regretti.",
+											"",
+											"",
+											"",
+											};
+private String [] randomQuitResponses =	{
+											"You're going to forget important things like those duck underwear you have.",
+											"Don't waste any time. Come on now.",
+											"Don't come crying to me later if you barely have any time to pack >:(",
+											"",
+											"",
+											"",
+		};
+
 }
