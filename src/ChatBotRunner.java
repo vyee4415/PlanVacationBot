@@ -73,7 +73,7 @@ public class ChatBotRunner
 		
 		
 		if (user.equals("4")) {
-			System.out.println (chatbot1.getGreeting());
+			System.out.println (chatbot4.getGreeting());
 			String statement = topic.nextLine();
 
 			while (!statement.toLowerCase().equals("bye"))

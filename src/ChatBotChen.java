@@ -3,8 +3,9 @@ import java.util.Random;
 /**
  * A program to carry on conversations with a human user.
  * This version:
- * @author Mr. Levin
+ * @author Jacky Chen
  * @version September 2017
+ * Based on starter code by Mr.Levin
  */
 public class ChatBotChen
 {
@@ -16,7 +17,7 @@ public class ChatBotChen
 	 */	
 	public String getGreeting()
 	{
-		return "Hi, what is up?";
+		return "Hey! Where are you going this break? Please type in complete sentences.";
 	}
 	
 	/**
@@ -32,21 +33,17 @@ public class ChatBotChen
 		
 		if (statement.length() == 0)
 		{
-			response = "Say something, please.";
+			response = "Ok.";
+			emotion--;
 		}
-
-		else if (findKeyword(statement, "no") >= 0)
+		else if (findKeyword(statement,"going to") >= 0)
 		{
-			response = "Why so negative?";
-                	emotion--;
-		}
-		
-		else if (findKeyword(statement, "levin") >= 0)
-		{
-			response = "More like LevinTheDream amiright?";
+			response = transformGoingToStatement(statement);
 			emotion++;
+   		}
+		else if(findKeyword(statement,"because")>=0) {
+			response = transformbecauseStatement(statement);
 		}
-
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
 		{
@@ -70,6 +67,41 @@ public class ChatBotChen
 	 * @param statement the user statement, assumed to contain "I want to"
 	 * @return the transformed statement
 	 */
+	private String transformGoingToStatement(String statement)
+	{
+		{
+			//  Remove the final period, if there is one
+			statement = statement.trim();
+			String lastChar = statement.substring(statement
+					.length() - 1);
+			if (lastChar.equals("."))
+			{
+				statement = statement.substring(0, statement
+						.length() - 1);
+			}
+			int psn = findKeyword (statement, "going to", 0);
+			String restOfStatement = statement.substring(psn + 8).trim();
+			return "Sounds great! Why do you want to go to " + restOfStatement + "?";
+		}
+	
+	}
+	private String transformbecauseStatement(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+		int psn = findKeyword (statement, "because", 0);
+		String restOfStatement = statement.substring(psn + 7).trim();
+		return "Interesting... Tell me more about why " + restOfStatement ;
+	}
+
+	
 	private String transformIWantToStatement(String statement)
 	{
 		//  Remove the final period, if there is one
@@ -236,14 +268,18 @@ public class ChatBotChen
 	}
 	
 	private String [] randomNeutralResponses = {"Interesting, tell me more",
-			"Hmmm.",
-			"Do you really think so?",
-			"You don't say.",
-			"It's all boolean to me.",
-			"So, would you like to go for a walk?",
+			"Where do you want to go again?",
+			"My favorite place to travel to is the United States.",
+			"Oh boy I love talking about travel.",
+			"Vacations are just so great.",
+			"So, would you like to go take a vacation with me.",
 			"Could you say that again?"
 	};
-	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
-	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
+	private String [] randomAngryResponses = {"Argh expensive air fees!", "Delays are the worst.", "Screw it I'm taking the train."};
+	private String [] randomHappyResponses = {"Have a nice vacation!", "I love taking vacations."};
 	
 }
+
+
+
+
