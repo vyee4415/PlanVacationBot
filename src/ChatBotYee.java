@@ -1,22 +1,24 @@
 import java.util.Random;
 
 /**
- * A program to carry on conversations with a human user.
- * This version:
- * @author Mr. Levin
- * @version September 2017
+ * Vacation bot
+ * Vivian Yee
+ * Period 2
  */
 public class ChatBotYee
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int frustration = 0;
+	int places = 0;
+	int and = 0;
+	String x="";
 	/**
 	 * Get a default greeting 	
 	 * @return a greeting
 	 */	
 	public String getGreeting()
 	{
-		return "Hi, what's good dood?";
+		return "Hi, what's good dood? I'm a pick a nice vacation bot. Give me some countries you want to go to and I'll say if it's a nice place to go to or not!";
 	}
 	
 	/**
@@ -32,8 +34,7 @@ public class ChatBotYee
 		Random r = new Random ();
 		if (statement.length() == 0)
 		{
-			response = "Say something, please.";
-			frustration++;
+			response = "Say something!!";
 		}
 
 // bad places that chatbot does not agree with
@@ -42,48 +43,67 @@ public class ChatBotYee
 			frustration++;
 			return randomChinaResponses [r.nextInt(randomChinaResponses.length)];
 		}
-		else if (findKeyword(statement, "China") >= 0)
+		else if (findKeyword(statement, "Mexico") >= 0)
 		{
 			frustration++;
-			return randomChinaResponses [r.nextInt(randomChinaResponses.length)];
+			return randomMexicoResponses [r.nextInt(randomMexicoResponses.length)];
 		}
-		else if (findKeyword(statement, "China") >= 0)
+		else if (findKeyword(statement, "Spain") >= 0)
 		{
 			frustration++;
-			return randomChinaResponses [r.nextInt(randomChinaResponses.length)];
+			return randomSpainResponses [r.nextInt(randomSpainResponses.length)];
 		}
 		
 // good places that chatbot agrees with
 		else if (findKeyword(statement, "Russia") >=0)
 		{
 			frustration--;
+			if(and>=1) {
+				x+=" and Russia";
+			}else {
+				x+=" Russia";
+			}
+			and++;
 			return randomRussiaResponses [r.nextInt(randomRussiaResponses.length)];
 		}
-		else if (findKeyword(statement, "Russia") >=0)
+		else if (findKeyword(statement, "Italy") >=0)
 		{
 			frustration--;
-			return randomRussiaResponses [r.nextInt(randomRussiaResponses.length)];
+			if(and>=1) {
+				x+=" and Italy";
+			}else {
+				x+=" Italy";
+			}
+			and++;
+			return randomItalyResponses [r.nextInt(randomItalyResponses.length)];
 		}
-		else if (findKeyword(statement, "Russia") >=0)
+		else if (findKeyword(statement, "Japan") >=0)
 		{
 			frustration--;
-			return randomRussiaResponses [r.nextInt(randomRussiaResponses.length)];
+			if(and>=1) {
+				x+=" and Japan";
+			}else {
+				x+=" Japan";
+			}
+			and++;
+			return randomJapanResponses [r.nextInt(randomJapanResponses.length)];
 		}
 		
 		else if(findKeyword(statement, "hello") >=0)
 		{
 			response = "Hello! Do you want to tell me what places you want to visit?";
 		}
-
+		
+		else if(findKeyword(statement,"because")>=0)
+		{
+			response = "Oh that's so cool!";
+		}
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to visit", 0) >= 0)
 		{
+			places++;
 			response = transformIWantToStatement(statement);
 		}
-		else if (findKeyword(statement, "I want",0) >= 0)
-		{
-			response = transformIWantStatement(statement);
-		}	
 		else
 		{
 			response = getRandomResponse();
@@ -110,33 +130,17 @@ public class ChatBotYee
 					.length() - 1);
 		}
 		int psn = findKeyword (statement, "I want to visit", 0);
-		String restOfStatement = statement.substring(psn + 9).trim();
-		return "Why do you want to " + restOfStatement + "?";
+		String restOfStatement = statement.substring(psn + 15).trim();
+		frustration--;
+		if(and>=1) {
+			x+=" and "+ restOfStatement;
+		}else {
+			x+=restOfStatement;
+		}
+		and++;
+		return "Why do you want to visit " + restOfStatement + "?";
 	}
 
-	
-	/**
-	 * Take a statement with "I want <something>." and transform it into 
-	 * "Would you really be happy if you had <something>?"
-	 * @param statement the user statement, assumed to contain "I want"
-	 * @return the transformed statement
-	 */
-	private String transformIWantStatement(String statement)
-	{
-		//  Remove the final period, if there is one
-		statement = statement.trim();
-		String lastChar = statement.substring(statement
-				.length() - 1);
-		if (lastChar.equals("."))
-		{
-			statement = statement.substring(0, statement
-					.length() - 1);
-		}
-		int psn = findKeyword (statement, "I want", 0);
-		String restOfStatement = statement.substring(psn + 6).trim();
-		return "Would you really be happy if you " + restOfStatement + "?";
-	}	
-	
 	/**
 	 * Search for one word in phrase. The search is not case
 	 * sensitive. This method will check that the given goal
@@ -162,7 +166,7 @@ public class ChatBotYee
 		// the line below
 		int psn = phrase.indexOf(goal, startPos);
 
-		// Refinement--make sure the goal isn't part of a
+		// Refinement--make sure theoal isn't part of a
 		// word
 		while (psn >= 0)
 		{
@@ -222,9 +226,12 @@ public class ChatBotYee
 	private String getRandomResponse ()
 	{
 		Random r = new Random ();
-		if (frustration == 0)
+		if ((frustration == 0)&&(places == 0))
 		{	
 			return randomNeutralResponses [r.nextInt(randomNeutralResponses.length)];
+		}
+		if(frustration == 0) {
+			return "I like your choices to visit " + x + ". Tell me more!";
 		}
 		if (frustration > 0)
 		{	
@@ -234,28 +241,18 @@ public class ChatBotYee
 	}
 	
 	private String [] randomNeutralResponses = {"Tell me the places you want to visit",
-												"Hmmm...?",
-												"Do you really think so?",
-												"You don't say.",
-												"Could you say that again?",
-												"Really?"
+			"Could you say that again? Couldn't hear you.",
 	};
-	private String [] randomAngryResponses = {"I don't reccomend your places to visit.", 
-											"Hmph, I like my cold countries like Antartica..", 
-											"Eww."};
-	private String [] randomHappyResponses = {"We have a lot in common!", 
-											"Ooo I really want to visit there too..", 
-											"Oh I've been there before, totally reccomend."};
+	private String [] randomAngryResponses = {"I don't reccomend your places to visit, give me more", "Hmph, I like my cold countries like Antartica..", "Can you tell me an actual nice place to go?"};
+	private String [] randomHappyResponses = {"We have a lot in common!", "You have a good taste in countries, tell me more", "I think you have a good list of where you want to go, where else?"};
 	
-	private String [] randomChinaResponses = {"I personally don't like China...",
-											"Great wall, more like lame wall. hehe",
-											"What's so good about China, there's so much pollution!!"};
-
+	private String [] randomChinaResponses = {"I personally don't like China...","Great wall, more like lame wall. hehe","What's so good about China, there's so much pollution!!"};
+	private String [] randomMexicoResponses = {"Uhh... Too hot for my taste","I have remember bad experiences in Mexico...","No me gusta Mexico"};
+	private String [] randomSpainResponses = {"I remember Spain, it was lame.","Nope, don't reccomend."};
 	
-	private String [] randomRussiaResponses = {"OHH RUSSIA I LOVE RUSSIA!",
-												"ALTHOUGH I'VE NEVER BEEN TO RUSSIA I DREAM IT EVERY NIGHT!",
-												"RUSSIA!! <33"};
-	
+	private String [] randomRussiaResponses = {"OHH RUSSIA I LOVE RUSSIA!","ALTHOUGH I'VE NEVER BEEN TO RUSSIA I DREAM IT EVERY NIGHT!","RUSSIA!! <33"};
+	private String [] randomItalyResponses = {"PIZZA PLACE!","MARIO!","LEANING TOWER OF PIZZA! <3"};
+	private String [] randomJapanResponses = {"I LOVE JAPAN CULTURE!","THE CHERRY BLOSSOMS IN JAPAN ARE SO PRETTY!",""};
 }
 
 
