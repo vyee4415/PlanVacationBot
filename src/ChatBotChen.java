@@ -42,7 +42,7 @@ public class ChatBotChen
 			emotion++;
    		}
 		else if(findKeyword(statement,"because")>=0) {
-			response = transformbecauseStatement(statement);
+			response = transformbecauseIwantStatement(statement);
 		}
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
@@ -85,7 +85,7 @@ public class ChatBotChen
 		}
 	
 	}
-	private String transformbecauseStatement(String statement)
+	private String transformbecauseIwantStatement(String statement)
 	{
 		//  Remove the final period, if there is one
 		statement = statement.trim();
@@ -96,9 +96,9 @@ public class ChatBotChen
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		int psn = findKeyword (statement, "because", 0);
-		String restOfStatement = statement.substring(psn + 7).trim();
-		return "Interesting... Tell me more about why " + restOfStatement ;
+		int psn = findKeyword (statement, "because I want to ", 0);
+		String restOfStatement = statement.substring(psn + 18).trim();
+		return "Interesting... Tell me more about why you want to " + restOfStatement ;
 	}
 
 	
@@ -275,7 +275,7 @@ public class ChatBotChen
 			"So, would you like to go take a vacation with me.",
 			"Could you say that again?"
 	};
-	private String [] randomAngryResponses = {"Argh expensive air fees!", "Delays are the worst.", "Screw it I'm taking the train."};
+	private String [] randomAngryResponses = {"Argh expensive air fees!", "Delays are the worst.", "Airplane food sucks."};
 	private String [] randomHappyResponses = {"Have a nice vacation!", "I love taking vacations."};
 	
 }

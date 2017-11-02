@@ -25,7 +25,7 @@ public class ChatBotRunner
 				+ "--> Type 1 to get help with packing! <--\n" 
 				+ "--> Type 2 to get help planning what places to visit! <--\n" 
 				+ "--> Type 3 to get help with the financial aspects of the trip! <--\n" 
-				+ "--> Type 4 to get help with ! <--\n" 
+				+ "--> Type 4 if you already know where you're going! <--\n" 
 				+ "--> Type " 
 				+ "\"bye\" " 
 				+ "if you don't need any more help! <--"
