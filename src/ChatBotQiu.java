@@ -179,9 +179,9 @@ public class ChatBotQiu
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		int psn = findKeyword (statement, "I want to", 0);
-		String restOfStatement = statement.substring(psn + 9).trim();
-		return "Why do you want to " + restOfStatement + "?";
+		int psn = findKeyword (statement, "I need help", 0);
+		String restOfStatement = statement.substring(psn + 11).trim();
+		return "I can help you with " + restOfStatement + "!";
 	}
 
 	
