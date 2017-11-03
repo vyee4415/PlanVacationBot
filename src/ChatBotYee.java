@@ -131,7 +131,6 @@ public class ChatBotYee
 		}
 		int psn = findKeyword (statement, "I want to visit", 0);
 		String restOfStatement = statement.substring(psn + 15).trim();
-		frustration--;
 		if(and>=1) {
 			x+=" and "+ restOfStatement;
 		}else {
