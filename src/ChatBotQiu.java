@@ -145,10 +145,10 @@ public class ChatBotQiu
 		
 		
 
-		// Response transforming I want to statement
-		else if (findKeyword(statement, "I want to", 0) >= 0)
+		// Response transforming I need help statement
+		else if (findKeyword(statement, "I need help", 0) >= 0)
 		{
-			response = transformIWantToStatement(statement);
+			response = transformINeedHelpStatement(statement);
 		}
 		else if (findKeyword(statement, "I want",0) >= 0)
 		{
@@ -163,12 +163,12 @@ public class ChatBotQiu
 	}
 	
 	/**
-	 * Take a statement with "I want to <something>." and transform it into 
-	 * "Why do you want to <something>?"
+	 * Take a statement with "I need help <something>." and transform it into 
+	 * "I can help you with <something>!"
 	 * @param statement the user statement, assumed to contain "I want to"
 	 * @return the transformed statement
 	 */
-	private String transformIWantToStatement(String statement)
+	private String transformINeedHelpStatement(String statement)
 	{
 		//  Remove the final period, if there is one
 		statement = statement.trim();
@@ -187,7 +187,7 @@ public class ChatBotQiu
 	
 	/**
 	 * Take a statement with "I want <something>." and transform it into 
-	 * "Would you really be happy if you had <something>?"
+	 * "You can have  <something> if you work hard!"
 	 * @param statement the user statement, assumed to contain "I want"
 	 * @return the transformed statement
 	 */
@@ -204,34 +204,9 @@ public class ChatBotQiu
 		}
 		int psn = findKeyword (statement, "I want", 0);
 		String restOfStatement = statement.substring(psn + 6).trim();
-		return "You can have " + restOfStatement + "if you work hard.";
+		return "You can have " + restOfStatement + " if you work hard!";
 	}
 	
-	
-	/**
-	 * Take a statement with "I <something> you" and transform it into 
-	 * "Why do you <something> me?"
-	 * @param statement the user statement, assumed to contain "I" followed by "you"
-	 * @return the transformed statement
-	 */
-	private String transformIYouStatement(String statement)
-	{
-		//  Remove the final period, if there is one
-		statement = statement.trim();
-		String lastChar = statement.substring(statement
-				.length() - 1);
-		if (lastChar.equals("."))
-		{
-			statement = statement.substring(0, statement
-					.length() - 1);
-		}
-		
-		int psnOfI = findKeyword (statement, "I", 0);
-		int psnOfYou = findKeyword (statement, "you", psnOfI);
-		
-		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
-		return "Why do you " + restOfStatement + " me?";
-	}
 	
 
 	
