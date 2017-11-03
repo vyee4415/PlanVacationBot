@@ -204,7 +204,7 @@ public class ChatBotQiu
 		}
 		int psn = findKeyword (statement, "I want", 0);
 		String restOfStatement = statement.substring(psn + 6).trim();
-		return "Would you really be happy if you had " + restOfStatement + "?";
+		return "You can have " + restOfStatement + "if you work hard.";
 	}
 	
 	
